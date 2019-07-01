@@ -1,4 +1,4 @@
-@model ZonePostings.Models.Posting
+﻿@model ZonePostings.Models.Posting
 
 @{
     ViewData["Title"] = "Details";
@@ -10,29 +10,29 @@
     <h4>Posting</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Payout)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Payout)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Risk)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Risk)
-        </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Title)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Title)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Description)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Payout)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Payout)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Risk)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Risk)
         </dd>
     </dl>
 </div>

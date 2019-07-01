@@ -14,7 +14,10 @@ namespace ZonePostings.Models
 
         public int Id { get; set; }
 
-        public Player Assignee { get; set; }
+        public Posting()
+        {
+            Available = true;
+        }
 
         [DataType(DataType.Currency)]
         [DisplayFormat(DataFormatString ="{0:C}")]
@@ -31,6 +34,14 @@ namespace ZonePostings.Models
 
         [Required]
         public string Description { get; set; }
+
+        public bool Available { get; set; }
+
+        
+        public override string ToString()
+        {
+            return $"ID = {Id}; Payout = {Payout}; Risk = {Risk}; Title = {Title}; Description = {Description}; Available = {Available}";
+        }
     }
 }
 

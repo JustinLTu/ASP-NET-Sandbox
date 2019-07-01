@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 namespace ZonePostings.Models
 {
@@ -25,6 +26,7 @@ namespace ZonePostings.Models
             Health = (int)HealthTiers.Healthy;
             Equipment = (int)EquipmentTiers.Worn;
             Name = "Strelok";
+            AssignedPostings = new List<Posting>();
         }
 
         public int Id { get; set; }
@@ -46,5 +48,7 @@ namespace ZonePostings.Models
         [Range(1, 4)]
         //Equipment level of player
         public int Equipment { get; set; }
+
+        public List<Posting> AssignedPostings { get; set; }
     }
 }

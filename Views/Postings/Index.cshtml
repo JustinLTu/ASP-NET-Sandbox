@@ -13,23 +13,38 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Payout)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Risk)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                @Html.DisplayNameFor(model => model.Available)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @if(item.Available) {
+                    <span>Available</span>
+                } else {
+                    <span>Taken</span>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Payout)
             </td>
@@ -46,12 +61,6 @@
                 @if(item.Risk == 4) {
                     <span>Dangerous</span>
                 }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

@@ -35,6 +35,54 @@
             @Html.DisplayFor(model => model.Equipment)
         </dd>
     </dl>
+    <h2>Currently Taken Postings</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Payout
+                </th>
+                <th>
+                    Risk
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.AssignedPostings) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Payout)
+                    </td>
+                    <td>
+                        @if(item.Risk == 1) {
+                            <span>Minimal</span>
+                        } 
+                        @if(item.Risk == 2) {
+                            <span>Low</span>
+                        } 
+                        @if(item.Risk == 3) {
+                            <span>Moderate</span>
+                        }
+                        @if(item.Risk == 4) {
+                            <span>Dangerous</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 <div>
     <a asp-action="Index">Back to List</a>

@@ -12,10 +12,12 @@ namespace ZonePostings.Controllers
     public class PostingsController : Controller
     {
         private readonly PostingContext _context;
+        private readonly PlayerContext _playerContext;
 
-        public PostingsController(PostingContext context)
+        public PostingsController(PostingContext context, PlayerContext playerContext)
         {
             _context = context;
+            _playerContext = playerContext;
         }
 
         // GET: Postings
@@ -73,6 +75,16 @@ namespace ZonePostings.Controllers
             }
 
             var posting = await _context.Posting.FindAsync(id);
+            var player = await _playerContext.Players.FirstAsync();
+            
+            if(player == null)
+            {
+                Console.WriteLine("Found no Player");
+            } else
+            {
+                Console.WriteLine("Given Player was " + player.Name);
+            }
+
             if (posting == null)
             {
                 return NotFound();
@@ -85,7 +97,7 @@ namespace ZonePostings.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Payout,Risk,Title,Description")] Posting posting)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Payout,Risk,Title,Description,Available")] Posting posting)
         {
             if (id != posting.Id)
             {
@@ -96,6 +108,19 @@ namespace ZonePostings.Controllers
             {
                 try
                 {
+                    var player = await _playerContext.Players.FirstAsync();
+
+                    if (player == null)
+                    {
+                        Console.WriteLine("Found no Player");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Given Player was " + player.Name);
+                        var result = player.AssignedPostings.Find(current => current.Id == posting.Id);
+                        Console.WriteLine("Found result : {0}", result.ToString());
+                        player.AssignedPostings.Add(posting);
+                    }
                     _context.Update(posting);
                     await _context.SaveChangesAsync();
                 }

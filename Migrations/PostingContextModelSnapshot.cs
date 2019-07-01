@@ -20,6 +20,8 @@ namespace ZonePostings.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<bool>("Available");
+
                     b.Property<string>("Description")
                         .IsRequired();
 

@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ZonePostings.Models;
 
-namespace ZonePostings.Migrations.Player
+namespace ZonePostings.Migrations
 {
-    [DbContext(typeof(PlayerContext))]
-    [Migration("20190628143612_InitialPosting")]
-    partial class InitialPosting
+    [DbContext(typeof(PostingContext))]
+    [Migration("20190701152404_ModifiedPosting")]
+    partial class ModifiedPosting
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -17,22 +17,26 @@ namespace ZonePostings.Migrations.Player
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
 
-            modelBuilder.Entity("ZonePostings.Models.Player", b =>
+            modelBuilder.Entity("ZonePostings.Models.Posting", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("Equipment");
+                    b.Property<bool>("Available");
 
-                    b.Property<int>("Health");
+                    b.Property<string>("Description")
+                        .IsRequired();
 
-                    b.Property<string>("Name");
+                    b.Property<int>("Payout");
 
-                    b.Property<int>("Savings");
+                    b.Property<int>("Risk");
+
+                    b.Property<string>("Title")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
-                    b.ToTable("Players");
+                    b.ToTable("Posting");
                 });
 #pragma warning restore 612, 618
         }

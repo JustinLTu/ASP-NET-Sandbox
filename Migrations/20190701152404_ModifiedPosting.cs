@@ -1,32 +1,33 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ZonePostings.Migrations.Player
+namespace ZonePostings.Migrations
 {
-    public partial class InitialPosting : Migration
+    public partial class ModifiedPosting : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Players",
+                name: "Posting",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: true),
-                    Savings = table.Column<int>(nullable: false),
-                    Health = table.Column<int>(nullable: false),
-                    Equipment = table.Column<int>(nullable: false)
+                    Payout = table.Column<int>(nullable: false),
+                    Risk = table.Column<int>(nullable: false),
+                    Title = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: false),
+                    Available = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Players", x => x.Id);
+                    table.PrimaryKey("PK_Posting", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Players");
+                name: "Posting");
         }
     }
 }
