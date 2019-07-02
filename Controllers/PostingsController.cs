@@ -110,16 +110,27 @@ namespace ZonePostings.Controllers
                 {
                     var player = await _playerContext.Players.FirstAsync();
 
-                    if (player == null)
+                    if (posting.Available)
                     {
-                        Console.WriteLine("Found no Player");
+                        Console.WriteLine("Given Player was " + player.Name);
+                        bool playerHasPosting = false;
+                        foreach(Posting current in player.AssignedPostings) 
+                        {
+                           if(current.Id == posting.Id)
+                            {
+                                playerHasPosting = true;
+                                break;
+                            }
+                        }
+                        Console.WriteLine($"Player has posting?: {playerHasPosting}");
+                        if(!playerHasPosting)
+                        {
+                            player.AssignedPostings.Add(posting);
+                        }
                     }
                     else
                     {
-                        Console.WriteLine("Given Player was " + player.Name);
-                        var result = player.AssignedPostings.Find(current => current.Id == posting.Id);
-                        Console.WriteLine("Found result : {0}", result.ToString());
-                        player.AssignedPostings.Add(posting);
+
                     }
                     _context.Update(posting);
                     await _context.SaveChangesAsync();
